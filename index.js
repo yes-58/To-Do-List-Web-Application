@@ -1,7 +1,7 @@
 const express = require('express');
 
 // PORT NUMBER AT WHICH OUR SERVER WILL BE RUNNING
-const port = 8000;
+//const port = 8000;
 
 // CREATE TO THE DATABASE
 const db = require('./config/mongoose');
@@ -95,10 +95,21 @@ app.post('/delete-todo', function(req, res) {
     return res.redirect('back');
 });
 
-// SERVER
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+
+app.listen(port,function(){
+    console.log("Server has started successfully");
+})
+
+/* SERVER
 app.listen(port, function(err) {
     if(err) {
         console.log("Error in setting up the express server!");
     }
     console.log("Express server is up and running on port:", port);
 });
+
+*/
